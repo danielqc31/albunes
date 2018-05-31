@@ -1,0 +1,52 @@
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Álbum</label>
+    <select [(ngModel)]="albumSeleccionado" class="form-control" name="album">
+      <option *ngFor="let a of albunes" [ngValue]="a">{{a.title}}</option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="obtenerFotos(albumSeleccionado.id)">Visualizar Álbum</button>
+</form>
+<div class="row mt-5" *ngIf="fotos.length > 0">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Título</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let foto of fotos; let i = index;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{foto.title}}</td>
+        <td>
+          <button type="button" class="btn btn-secondary" (click)="verComentario(foto.id)">Ver Comentario</button>
+          <button type="button" class="btn btn-secondary" [routerLink]="['/fotos', foto.id]">Ver2</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row mt-3" *ngIf="comentarios.length > 0">
+  <h3>Comentarios</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Comentario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comentario of comentarios; let i = index;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{comentario.name}}</td>
+        <td>{{comentario.email}}</td>
+        <td>{{comentario.body}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
