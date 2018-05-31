@@ -12,7 +12,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Título</th>
+        <th scope="col" width="50%">Título</th>
+        <th scope="col">Foto</th>
         <th scope="col">Opciones</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
       <tr *ngFor="let foto of fotos; let i = index;">
         <th scope="row">{{i + 1}}</th>
         <td>{{foto.title}}</td>
+        <td><img [src]="foto.thumbnailUrl" [alt]="foto.title" class="img-thumbnail img-fluid"></td>
         <td>
           <button type="button" class="btn btn-secondary" (click)="verComentario(foto.id)">Ver Comentario</button>
           <button type="button" class="btn btn-secondary" [routerLink]="['/fotos', foto.id]">Ver2</button>
