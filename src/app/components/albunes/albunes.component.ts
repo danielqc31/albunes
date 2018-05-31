@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AlbumService } from '../../services/album.service';
 import { Album } from '../../models/album';
 import { Foto } from '../../models/foto';
@@ -10,6 +10,8 @@ import { Comentario } from '../../models/comentario';
   styles: []
 })
 export class AlbunesComponent implements OnInit {
+
+  @ViewChild('comentariosDiv') private elementRef: ElementRef;
 
   albunes: Album[] = [];
   albumSeleccionado: Album;
@@ -27,7 +29,11 @@ export class AlbunesComponent implements OnInit {
   }
 
   verComentario(idFoto: number) {
-    this.albumService.obtenerComentariosDeFoto(idFoto).subscribe(res => this.comentarios = res);
+    this.albumService.obtenerComentariosDeFoto(idFoto).subscribe(res => {
+      this.comentarios = res;
+      console.log(this.elementRef.nativeElement)
+      setTimeout(() => this.elementRef.nativeElement.focus());
+    });
   }
 
   private obtenerFotos(id: number) {
